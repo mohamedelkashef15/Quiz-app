@@ -1,1 +1,5 @@
-- replace useState with useReducer inside DateCounter
+Project functionality
+
+- replace count with useReducer inside DateCounter
+- replace step with useReducer inside DateCounter
+- set reset btn into initial state
