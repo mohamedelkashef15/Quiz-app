@@ -1,0 +1,7 @@
+Project functionality
+  - replace count with useReducer inside DateCounter
+  - replace step with useReducer inside DateCounter
+  - set reset btn into initial state
+
+Project Structure
+  - Add Header, Main component

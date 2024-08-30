@@ -4,7 +4,6 @@ interface IState {
   count: number;
   step: number;
 }
-const initialState = { count: 0, step: 1 };
 
 type IAction =
   | { type: "dec" }
@@ -12,6 +11,8 @@ type IAction =
   | { type: "reset" }
   | { type: "setCount"; payload: number }
   | { type: "setStep"; payload: number };
+
+const initialState = { count: 0, step: 1 };
 
 function reducer(state: IState, action: IAction) {
   switch (action.type) {
@@ -25,17 +26,16 @@ function reducer(state: IState, action: IAction) {
       return { ...state, step: action.payload };
     case "reset":
       return initialState;
+
     default:
-      throw new Error("unkown command");
+      throw new Error("Unkown command");
   }
 }
 
 function DateCounter() {
-  // const [count, setCount] = useState(0);
-  // const [step, setStep] = useState(1);
-
   const [state, dispatch] = useReducer(reducer, initialState);
   const { count, step } = state;
+  // const [step, setStep] = useState(1);
 
   // This mutates the date object.
   const date = new Date("june 21 2027");
@@ -64,6 +64,8 @@ function DateCounter() {
   };
 
   const reset = function () {
+    // setCount(0);
+    // setStep(1);
     dispatch({ type: "reset" });
   };
 
