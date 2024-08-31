@@ -12,3 +12,5 @@ Project functionality
 
   - display that data in different ways into the UI 
     - in case of ready, error
+
+  - Add Loading, Error, and StartSceen Components into home screen
