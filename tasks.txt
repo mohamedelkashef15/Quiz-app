@@ -1,7 +1,14 @@
+Project Structure
+  - Add Header, Main component
+
 Project functionality
   - replace count with useReducer inside DateCounter
   - replace step with useReducer inside DateCounter
   - set reset btn into initial state
 
-Project Structure
-  - Add Header, Main component
+  - add json-server
+  - fetch data from localhost 
+    - set status => loading, error, ready 
+
+  - display that data in different ways into the UI 
+    - in case of ready, error
