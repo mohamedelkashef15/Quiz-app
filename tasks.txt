@@ -11,6 +11,9 @@ Project functionality
     - set status => loading, error, ready 
 
   - display that data in different ways into the UI 
-    - in case of ready, error
+    - in case of ready, error using useReducer
 
   - Add Loading, Error, and StartSceen Components into home screen
+
+  - Implement functionality of starting a new quiz 
+    - by clicking into the Let's start btn display quiz start

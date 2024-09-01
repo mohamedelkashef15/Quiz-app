@@ -1,43 +1,38 @@
+/*
 import { useEffect, useReducer } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import StartScreen from "./components/StartScreen";
-import Loader from "./components/Loader";
 import ErrorMessage from "./components/Error";
-import Question from "./components/Question";
+import Loader from "./components/Loader";
+import StartScreen from "./components/StartScreen";
 
 interface IState {
   questions: string[];
   status: string;
 }
 
-export type Action =
-  | { type: "dataRecived"; payload: string[] }
-  | { type: "dataFailed"; error: string }
-  | { type: "start" };
+type Action = { type: "dataRecived"; payload: string[] } | { type: "dataFailed"; error: string };
 
-const initialState = {
+const initialState: IState = {
   questions: [],
   // loading, ready, error
   status: "loading",
 };
 
-function reducer(state: IState, action: Action) {
+function reducer(state: IState, action: Action): IState {
   switch (action.type) {
     case "dataRecived":
       return { ...state, questions: action.payload, status: "ready" };
     case "dataFailed":
       return { ...state, status: "error" };
-    case "start":
-      return { ...state, status: "active" };
-
     default:
-      throw new Error("Unkown Action");
+      throw new Error("Action unknown");
   }
 }
 
 function App() {
-  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { questions, status } = state;
 
   const numQuestions = questions.length;
 
@@ -58,13 +53,13 @@ function App() {
     <div className="app">
       <Header />
       <Main>
-        {status === "ready" && <StartScreen numQuestions={numQuestions} dispatch={dispatch} />}
-        {status === "failed" && <Loader />}
         {status === "error" && <ErrorMessage />}
-        {status === "active" && <Question />}
+        {status === "loading" && <Loader />}
+        {status === "ready" && <StartScreen numQuestions={numQuestions} />}
       </Main>
     </div>
   );
 }
 
 export default App;
+*/
