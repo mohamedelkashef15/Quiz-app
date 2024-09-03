@@ -17,3 +17,4 @@ Project functionality
 
   - Implement functionality of starting a new quiz 
     - by clicking into the Let's start btn display quiz start
+    - Displaying questions & options 

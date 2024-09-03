@@ -1,25 +1,18 @@
 import { useEffect, useReducer } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import StartScreen from "./components/StartScreen";
-import Loader from "./components/Loader";
+import { Action, IQuestion } from "./components/interfaces";
+import { IState } from "./components/interfaces";
 import ErrorMessage from "./components/Error";
-import Question from "./components/Question";
+import Loader from "./components/Loader";
+import StartScreen from "./components/StartScreen";
+import Questions from "./components/Questions";
 
-interface IState {
-  questions: string[];
-  status: string;
-}
-
-export type Action =
-  | { type: "dataRecived"; payload: string[] }
-  | { type: "dataFailed"; error: string }
-  | { type: "start" };
-
-const initialState = {
+const initialState: IState = {
   questions: [],
-  // loading, ready, error
+  // loading, ready, start, error
   status: "loading",
+  index: 0,
 };
 
 function reducer(state: IState, action: Action) {
@@ -30,14 +23,13 @@ function reducer(state: IState, action: Action) {
       return { ...state, status: "error" };
     case "start":
       return { ...state, status: "active" };
-
     default:
       throw new Error("Unkown Action");
   }
 }
 
 function App() {
-  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, index }, dispatch] = useReducer(reducer, initialState);
 
   const numQuestions = questions.length;
 
@@ -45,7 +37,7 @@ function App() {
     async function fetchData() {
       try {
         const res = await fetch("http://localhost:8000/questions");
-        const data = await res.json();
+        const data: IQuestion[] = await res.json();
         dispatch({ type: "dataRecived", payload: data });
       } catch (err) {
         dispatch({ type: "dataFailed", error: (err as Error).message });
@@ -53,15 +45,16 @@ function App() {
     }
     fetchData();
   }, []);
+  console.log(questions[0]);
 
   return (
     <div className="app">
       <Header />
       <Main>
+        {status === "dataFailed" && <ErrorMessage />}
+        {status === "loading" && <Loader />}
         {status === "ready" && <StartScreen numQuestions={numQuestions} dispatch={dispatch} />}
-        {status === "failed" && <Loader />}
-        {status === "error" && <ErrorMessage />}
-        {status === "active" && <Question />}
+        {status === "active" && <Questions question={questions[index]} />}
       </Main>
     </div>
   );

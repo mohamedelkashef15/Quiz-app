@@ -1,17 +1,14 @@
-import { Action } from "../App";
+import { Dispatch } from "react";
+import { Action } from "./interfaces";
+// Assuming Action is defined as:
 
-interface IStartScreen {
-  numQuestions: number;
-  dispatch: React.Dispatch<Action>;
-}
-
-function StartScreen({ numQuestions, dispatch }: IStartScreen) {
+function StartScreen({ numQuestions, dispatch }: { numQuestions: number; dispatch: Dispatch<Action> }) {
   return (
     <div className="start">
       <h2>Welcome to The React Quiz!</h2>
       <h3>{numQuestions} questions to test your React mastery</h3>
       <button className="btn btn-ui" onClick={() => dispatch({ type: "start" })}>
-        Let's start
+        Let's Start
       </button>
     </div>
   );
