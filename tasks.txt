@@ -18,3 +18,14 @@ Project functionality
   - Implement functionality of starting a new quiz 
     - by clicking into the Let's start btn display quiz start
     - Displaying questions & options 
+
+  - Handling add answers
+    1- Correct and wrong answers should be displayed 
+      - onClick to btn option display correct and wrong answers
+        - select value of anwser to be displayed according to selected index
+        - after selecting btn let all btns to be disabled so, we cannot select any button again
+
+      - create conditinal class rendering to display correct option with style 
+
+    2- Number of points will be updated 
+      

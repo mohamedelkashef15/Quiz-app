@@ -13,7 +13,13 @@ const initialState: IState = {
   // loading, ready, start, error
   status: "loading",
   index: 0,
+  answer: null,
+  totalPoints: 0,
 };
+
+/*
+  - if selected option equal correct option then add points to total points 
+*/
 
 function reducer(state: IState, action: Action) {
   switch (action.type) {
@@ -23,13 +29,23 @@ function reducer(state: IState, action: Action) {
       return { ...state, status: "error" };
     case "start":
       return { ...state, status: "active" };
+    case "newAnswer": {
+      const question = state.questions.at(state.index);
+      return {
+        ...state,
+        answer: action.payload,
+        totalPoints:
+          action.payload === question?.correctOption ? (state.totalPoints += question.points) : state.totalPoints,
+      };
+    }
+
     default:
       throw new Error("Unkown Action");
   }
 }
 
 function App() {
-  const [{ questions, status, index }, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, index, answer }, dispatch] = useReducer(reducer, initialState);
 
   const numQuestions = questions.length;
 
@@ -45,7 +61,6 @@ function App() {
     }
     fetchData();
   }, []);
-  console.log(questions[0]);
 
   return (
     <div className="app">
@@ -54,7 +69,7 @@ function App() {
         {status === "dataFailed" && <ErrorMessage />}
         {status === "loading" && <Loader />}
         {status === "ready" && <StartScreen numQuestions={numQuestions} dispatch={dispatch} />}
-        {status === "active" && <Questions question={questions[index]} />}
+        {status === "active" && <Questions question={questions[index]} answer={answer} dispatch={dispatch} />}
       </Main>
     </div>
   );
