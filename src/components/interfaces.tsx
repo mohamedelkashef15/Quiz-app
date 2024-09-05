@@ -27,8 +27,14 @@ export interface IOptions {
   dispatch: Dispatch<Action>;
 }
 
+export interface INextButton {
+  dispatch: Dispatch<Action>;
+  answer: number | null;
+}
+
 export type Action =
   | { type: "dataRecived"; payload: IQuestion[] }
   | { type: "dataFailed"; error: string }
   | { type: "start" }
-  | { type: "newAnswer"; payload: null | number; points?: number };
+  | { type: "newAnswer"; payload: null | number; points?: number }
+  | { type: "nextQuestion" };

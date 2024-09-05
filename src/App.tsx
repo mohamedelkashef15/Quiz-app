@@ -7,6 +7,7 @@ import ErrorMessage from "./components/Error";
 import Loader from "./components/Loader";
 import StartScreen from "./components/StartScreen";
 import Questions from "./components/Questions";
+import NextButton from "./components/NextButton";
 
 const initialState: IState = {
   questions: [],
@@ -16,10 +17,6 @@ const initialState: IState = {
   answer: null,
   totalPoints: 0,
 };
-
-/*
-  - if selected option equal correct option then add points to total points 
-*/
 
 function reducer(state: IState, action: Action) {
   switch (action.type) {
@@ -35,10 +32,11 @@ function reducer(state: IState, action: Action) {
         ...state,
         answer: action.payload,
         totalPoints:
-          action.payload === question?.correctOption ? (state.totalPoints += question.points) : state.totalPoints,
+          question?.correctOption === action.payload ? (state.totalPoints += question.points) : state.totalPoints,
       };
     }
-
+    case "nextQuestion":
+      return { ...state, index: (state.index += 1), answer: null };
     default:
       throw new Error("Unkown Action");
   }
@@ -69,7 +67,12 @@ function App() {
         {status === "dataFailed" && <ErrorMessage />}
         {status === "loading" && <Loader />}
         {status === "ready" && <StartScreen numQuestions={numQuestions} dispatch={dispatch} />}
-        {status === "active" && <Questions question={questions[index]} answer={answer} dispatch={dispatch} />}
+        {status === "active" && (
+          <>
+            <Questions question={questions[index]} answer={answer} dispatch={dispatch} />
+            <NextButton dispatch={dispatch} answer={answer} />
+          </>
+        )}
       </Main>
     </div>
   );

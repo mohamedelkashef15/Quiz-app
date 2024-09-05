@@ -28,4 +28,7 @@ Project functionality
       - create conditinal class rendering to display correct option with style 
 
     2- Number of points will be updated 
+
+    3- Moving to the next question
+      
       
