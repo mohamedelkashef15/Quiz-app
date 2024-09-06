@@ -7,6 +7,7 @@ export interface IState {
   answer: null | number;
   totalPoints: number;
   highScore: number;
+  secondRemaining: number | null;
 }
 export interface IQuestion {
   title: string;
@@ -49,6 +50,10 @@ export interface IFinishScreen {
   highScore: number;
   dispatch: Dispatch<Action>;
 }
+export interface ITimer {
+  secondRemaining: number | null;
+  dispatch: Dispatch<Action>;
+}
 
 export type Action =
   | { type: "dataRecived"; payload: IQuestion[] }
@@ -57,4 +62,5 @@ export type Action =
   | { type: "newAnswer"; payload: null | number; points?: number }
   | { type: "nextQuestion" }
   | { type: "finish" }
-  | { type: "restart" };
+  | { type: "restart" }
+  | { type: "tick" };

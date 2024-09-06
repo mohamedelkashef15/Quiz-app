@@ -44,4 +44,10 @@ Project functionality
     - display highScore functionality 
       - check if points higher than highScore then set high score to be equals points otherwise leave highScore as it is 
       
-      
+  - Add timer
+    - display timer at bottom of the screen 
+    - decrease "secondRemaining" each second by 1
+    - check if secondRemaining equal 0 then display FinishScreen component
+    - clean function 
+    - set secondRemaining equals number of questions by 30 second
+    - add 0 to timer if min or sec less that 10 
