@@ -29,6 +29,12 @@ Project functionality
 
     2- Number of points will be updated 
 
-    3- Moving to the next question
+    3- Moving to the next question 
+      - create Nextbutton component to go to next question 
+      
+  - Add progress bar 
+    - display paragraph for questions & points 
+    - Add progress bar and when we go to next question it starts to go 
+    - When we select any answer we want the progress bar to go 
       
       

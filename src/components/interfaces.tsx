@@ -32,6 +32,14 @@ export interface INextButton {
   answer: number | null;
 }
 
+export interface IProgress {
+  index: number;
+  totalPoints: number;
+  numQuestions: number;
+  maxPossiblePoints: number;
+  answer: number | null;
+}
+
 export type Action =
   | { type: "dataRecived"; payload: IQuestion[] }
   | { type: "dataFailed"; error: string }
