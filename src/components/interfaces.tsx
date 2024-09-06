@@ -6,6 +6,7 @@ export interface IState {
   index: number;
   answer: null | number;
   totalPoints: number;
+  highScore: number;
 }
 export interface IQuestion {
   title: string;
@@ -30,6 +31,8 @@ export interface IOptions {
 export interface INextButton {
   dispatch: Dispatch<Action>;
   answer: number | null;
+  index: number;
+  numQuestions: number;
 }
 
 export interface IProgress {
@@ -40,9 +43,16 @@ export interface IProgress {
   answer: number | null;
 }
 
+export interface IFinishScreen {
+  maxPossiblePoints: number;
+  points: number;
+  highScore: number;
+}
+
 export type Action =
   | { type: "dataRecived"; payload: IQuestion[] }
   | { type: "dataFailed"; error: string }
   | { type: "start" }
   | { type: "newAnswer"; payload: null | number; points?: number }
-  | { type: "nextQuestion" };
+  | { type: "nextQuestion" }
+  | { type: "finish" };
