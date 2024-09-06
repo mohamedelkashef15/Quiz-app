@@ -47,6 +47,7 @@ export interface IFinishScreen {
   maxPossiblePoints: number;
   points: number;
   highScore: number;
+  dispatch: Dispatch<Action>;
 }
 
 export type Action =
@@ -55,4 +56,5 @@ export type Action =
   | { type: "start" }
   | { type: "newAnswer"; payload: null | number; points?: number }
   | { type: "nextQuestion" }
-  | { type: "finish" };
+  | { type: "finish" }
+  | { type: "restart" };

@@ -44,6 +44,8 @@ function reducer(state: IState, action: Action) {
       const checkHighScore = state.totalPoints > state.highScore ? state.totalPoints : state.highScore;
       return { ...state, status: "finished", highScore: checkHighScore };
     }
+    case "restart":
+      return { ...initialState, questions: state.questions, status: "ready", highScore: state.highScore };
     default:
       throw new Error("Unkown Action");
   }
@@ -77,6 +79,7 @@ function App() {
         {status === "dataFailed" && <ErrorMessage />}
         {status === "loading" && <Loader />}
         {status === "ready" && <StartScreen numQuestions={numQuestions} dispatch={dispatch} />}
+        {status === "restart" && <StartScreen numQuestions={numQuestions} dispatch={dispatch} />}
         {status === "active" && (
           <>
             <Progress
@@ -91,7 +94,12 @@ function App() {
           </>
         )}
         {status === "finished" && (
-          <FinishScreen maxPossiblePoints={maxPossiblePoints} points={totalPoints} highScore={highScore} />
+          <FinishScreen
+            maxPossiblePoints={maxPossiblePoints}
+            points={totalPoints}
+            highScore={highScore}
+            dispatch={dispatch}
+          />
         )}
       </Main>
     </div>
